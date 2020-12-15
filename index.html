@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8" />
+	    <title>山西旅游</title>
+	    <link rel="stylesheet" href="css/normalize.css" />
+	    <link rel="stylesheet" href="css/index.css" />
+	    <script src="js/test.js">/*引入外部文件*/</script>
+	</head>
+	<body>
+		<div class="header-top">
+			<div class="container clear">
+	            <img src="img/logo.jpg" alt="logo图" class="logo" />
+	            <ul class="nav clear">
+	                <li><a href="#">首页</a></li>
+	                <li><a href="#">酒店</a></li>
+	                <li><a href="#">火/汽车票</a></li>
+	                <li><a href="#">景点</a></li>
+	                <li><a href="#">旅游团</a></li>
+	            </ul>
+	        </div>
+	        <div class="form clear">
+	            <form>
+	                <input type="text" placeholder="&nbsp;&nbsp;输入关键词" class="search" />
+	                <input type="button" value="搜索" class="submit" /><br />
+			        用户名: <input type = "text" name = "myname" /><br />
+			        密&nbsp;&nbsp;&nbsp;码: <input type = "password"  name = "pass" /><br /> 
+			        <input type="button" value="登录" class="submits" />
+			        <input type="button" value="注册" class="submits" />
+			        <input type="button" name="" value="评价" onclick="score()" />
+			    </form>
+		    </div>
+        </div>
+        <div class="box" id="box">
+			<div class="slider" id="slider">
+				<div class="slide"><img src="img/banner_05.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_01.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_02.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_03.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_04.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_05.jpg" alt="" class="banner_0"></div>
+				<div class="slide"><img src="img/banner_01.jpg" alt="" class="banner_0"></div>
+			</div>
+			<span id="left"><</span>
+			<span id="right">></span>
+			<ul class="naving" id="naving">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+	        var box = document.getElementById('box');
+			var oNavlist = document.getElementById('naving').children;
+			var slider = document.getElementById('slider');
+			var left = document.getElementById('left');
+			var right = document.getElementById('right');
+			var index = 1;
+			var timer;
+			var isMoving = false;
+			box.onmouseover = function(){
+				animate(left,{opacity:50})
+				animate(right,{opacity:50})
+				clearInterval(timer)
+			}
+			box.onmouseout = function(){
+				animate(left,{opacity:0})
+				animate(right,{opacity:0})
+				timer = setInterval(next, 3000);
+			}
+			right.onclick = next;
+			left.onclick = prev;
+			for( var i=0; i<oNavlist.length; i++ ){
+				oNavlist[i].index = i;
+				oNavlist[i].onclick = function(){
+					index = this.index+1;
+					navmove();
+					animate(slider,{left:-1200*index});
+				}
+			}
+			function next(){
+				if(isMoving){
+					return;
+				}
+				isMoving = true;
+				index++;
+				navmove();
+				animate(slider,{left:-1200*index},function(){
+					if(index==6){
+						slider.style.left = '-1200px';
+						index = 1;
+					}
+					isMoving = false;
+				});
+			}
+			function prev(){
+				if(isMoving){
+					return;
+				}
+				isMoving = true;
+				index--;
+				navmove();
+				animate(slider,{left:-1200*index},function(){
+					if(index==0){
+						slider.style.left = '-6000px';
+						index = 5;
+					}
+					isMoving = false;
+				});
+			}
+			function navmove(){
+				for( var i=0; i<oNavlist.length; i++ ){
+					oNavlist[i].className = "";
+				}
+				if(index >5 ){
+					oNavlist[0].className = "active";
+				}else if(index<=0){
+					oNavlist[4].className = "active";
+				}else {
+					oNavlist[index-1].className = "active";
+				}
+			}
+			timer = setInterval(next, 3000);
+		</script>
+		<!--
+        <div class="banner">
+        	<img src="img/banner.png" alt="banner图" class="clear" />
+        </div>
+    	-->
+        <div class="header-bottom">
+			<ul class="navs">
+	            <li><a href="#" class="clear">精品推荐</a></li>
+	            <li><a href="#" class="clear">大同</a></li>
+	            <li><a href="#" class="clear">太原</a></li>
+	            <li><a href="#" class="clear">广灵</a></li>
+	            <li><a href="#" class="clear">忻州</a></li>
+	        </ul>
+		</div>
+		<div class="product" align="center">
+			<div class="item">
+				<p class="top clear">大同景点</p>
+				<a href="#" class="a clear">查看全部</a>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/01.jpg" />
+				<div class="txt">
+					<span class="text1">云冈灵岩寺</span>
+					<br />
+					<span class="text2">灵岩寺坐落于云冈石窟大景区的湖心岛中央，整个寺院为三进院落，是按照北魏著名地理学家郦道元在《水经注》中的描述而仿建的。</span>
+				</div>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/02.jpg" />
+				<div class="txt">
+					<span class="text1">大同鼓楼</span>
+					<br />
+					<span class="text2">大同鼓楼，位于山西省大同市平城区永泰街，始建于明朝天顺七年至八年间，即公元1463-1464年。清代曾多次修缮，是明清楼阁式建筑的典型代表，充分显示出了古代劳动人民的智慧和力量。</span>
+				</div>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/03.jpg" />
+				<div class="txt">
+					<span class="text1">应县木塔</span>
+					<br />
+					<span class="text2">建于辽清宁二年（宋至和三年公元1056年），金明昌六年（南宋庆元一年公元1195年）增修完毕，是中国现存最高最古的且唯一一座木构塔式建筑。</span>
+				</div>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/04.jpg" />
+				<div class="txt">
+					<span class="text1">千佛岭</span>
+					<br />
+					<span class="text2">千佛岭位于浑源县城南30公里处，龙咀村西南，为恒山支脉，面积约14.2平方公里，四周层峦叠嶂，气势雄伟，素有“塞外小黄山”之称。</span>
+				</div>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/05.jpg" />
+				<div class="txt">
+					<span class="text1">善化寺五龙壁</span>
+					<br />
+					<span class="text2">此壁原为大北街三道营坊巷天竺庙山门前的照壁，建于明末，亦为五彩琉璃五龙壁。其风格与兴国寺五龙壁相似。因其有倒塌之险，于1978年拆除，原件现存于善化寺内。</span>
+				</div>
+			</div>
+			<div class="img clear" align="center">
+				<img src="img/06.jpg" />
+				<div class="txt">
+					<span class="text1">悬空寺</span>
+					<br />
+					<span class="text2">建成于公元491年，是佛、道、儒三教合一的独特寺庙。“悬空寺”建筑极具特色，以如临深渊的险峻而著称，素有“悬空寺，半天高，三根马尾空中吊”的俚语，以如临深渊的险峻而著称。</span>
+				</div>
+			</div>
+		</div>
+		<div class="special">
+			<div class="item">
+				<p class="top clear">大同特产</p>
+				<ul>
+					<li><a href="#" class="nave clear">精品推荐</a></li>
+					<li><a href="#" class="nave clear">灵丘</a></li>
+					<li><a href="#" class="nave clear">广灵</a></li>
+					<li><a href="#" class="nave clear">浑源</a></li>
+				</ul>
+				<a href="#" class="a clear">查看全部</a>
+			</div>
+			<div class="specialty clear" align="center">
+				<img src="img/07.jpg" />
+				<div class="txts">
+					<span class="text1">苦荞凉粉</span>
+					<br />
+					<span class="text2">苦荞面凉粉是山西灵丘独特的特色传统小吃，以它独特的地方风味久负盛名，誉满晋北。其制作方法并不难，一般农家都会制作，民间叫“出凉粉”。</span>
+				</div>
+			</div>
+			<div class="specialty clear" align="center">
+				<img src="img/08.jpg" />
+				<div class="txts">
+					<span class="text1">黄烧饼</span>
+					<br />
+					<span class="text2">黄烧饼是山西灵丘县名点。有300余年的历史。它选料上乘，做工精细，具有香甜酥脆、油多而不腻、利口不粘牙、久存放而色味不变等特点。多年来畅销娘子关外，主要产地在灵丘县。</span>
+				</div>
+			</div>
+			<div class="specialty clear" align="center">
+				<img src="img/09.jpg" />
+				<div class="txts">
+					<span class="text1">五香豆腐干</span>
+					<br />
+					<span class="text2">五香豆腐干是一道特色小吃，用大豆、全大料、食盐、酱色、五香粉等材料制成的一种食品。五香豆腐干富含丰富的蛋白质，而且豆腐蛋白属完全蛋白，且含人体所需的8种氨基酸，营养价值较高。</span>
+				</div>
+			</div>
+			<div class="specialty clear" align="center">
+				<img src="img/10.jpg" />
+				<div class="txts">
+					<span class="text1">苦荞茶</span>
+					<br />
+					<span class="text2">经过脱壳、晾晒、烘干等工艺制作而成的代用粮食茶，不是传统的茶叶茶。苦荞茶内含人体所需的多种微量元素如：钙、磷、铁、镁、硒等氨基酸。据《本草纲目》记载“荞麦性味苦、平寒、有益气力、续精神、利耳目、降气宽肠健胃的作用”。</span>
+				</div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="bottom-left">
+				<img src="img/logo.jpg" alt="logo图" class="logos" />
+				<br />
+				<span>欢迎来旅游</span>
+				<p>晋ICP备12011972号-4</p>
+			</div>
+			<div class="www">
+				<ul>
+					<li class="big">关于山西特产</li>
+					<li><a href="#" class="small">关于</a></li>
+					<li><a href="#" class="small">大同刀削面</a></li>
+					<li><a href="#" class="small">山西老陈醋</a></li>
+					<li><a href="#" class="small">平遥牛肉</a></li>
+					<li><a href="#" class="small">黄烧饼</a></li>
+				</ul>
+			</div>
+			<div class="wwws">
+				<ul>
+					<li class="big">新手指南</li>
+					<li><a href="#" class="small">如何注册</a></li>
+					<li><a href="#" class="small">如何加旅游团</a></li>
+					<li><a href="#" class="small">如何查车次</a></li>
+					<li><a href="#" class="small">如何买特产</a></li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			window.onload = function(){
+				setInterval('alert("注意爱护眼睛！")', 3000000);
+			}
+			function score(){
+				var num = prompt("请输入你评价：1（满意）2（一般）3（不满意）", "请输入对应数字：");
+				if(num == 3){
+					alert("投诉电话：10086");
+				}else{
+					alert("我们会继续努力的");
+				}
+			}
+			document.body.onload = function() {
+				setInterval(function(){
+					var num = '';
+	                for (var i = 0; i < 3; i++) {
+	                    num += parseInt(Math.random()*256) + ',';
+	                }
+	                num += Math.random();
+	                var color = 'rgba(' + num + ')';
+	                document.body.style.backgroundColor = color;
+				},10000);
+            }
+		</script>
+    </body>
+</html>
+		
